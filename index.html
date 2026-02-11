@@ -3,108 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U R MY PEACH 🍑</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Grandstander:wght@400;700&family=Shrikhand&display=swap" rel="stylesheet">
+    <title>Proposal Card</title>
     <style>
         :root {
-            --hot-orange: #ff4500;
+            --bratz-orange: #ff4500;
+            --bratz-yellow: #ffcc33;
             --peach-main: #ff8c00;
-            --peach-soft: #ffe5b4;
-            --peach-gold: #ffcc33;
-            --eggplant: #4b0082;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Grandstander', cursive;
-            background-color: var(--peach-soft);
+            background: linear-gradient(135deg, #ff9d8a, #f99244);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial Black', sans-serif;
             overflow: hidden;
-            margin: 0;
-            padding: 0;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🍑</text></svg>'), auto;
+            position: relative;
         }
 
-        .font-bratz { font-family: 'Shrikhand', cursive; }
-        .font-chunky { font-family: 'Titan One', cursive; }
+        /* Glassmorphism Main Card */
+        .kawaii-glass {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 40px;
+            padding: 2rem;
+            text-align: center;
+            width: 95%;
+            max-width: 600px;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
 
-        @keyframes float-emoji {
-            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(360deg) scale(0.7); opacity: 0; }
+        .emote { position: absolute; font-size: 4rem; opacity: 0.8; pointer-events: none; }
+        .top-left { top: 1rem; left: 1rem; transform: rotate(12deg); }
+        .top-right { top: 1rem; right: 1rem; transform: rotate(-12deg); }
+        .bottom-left { bottom: 1rem; left: 1rem; transform: rotate(-12deg); }
+        .bottom-right { bottom: 1rem; right: 1rem; transform: rotate(12deg); }
+
+        h1 { color: white; font-size: 2.5rem; text-shadow: 4px 4px 0px var(--bratz-orange); margin-bottom: 1.5rem; }
+        .chunky-tag { background: var(--bratz-yellow); padding: 0.5rem 1.5rem; border: 2px solid black; box-shadow: 4px 4px 0px #000; transform: rotate(-2deg); margin-bottom: 2rem; }
+
+        .bratz-button {
+            background: var(--bratz-orange);
+            color: white;
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 100px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
+            transition: all 0.3s;
+        }
+
+        #noBtn { background: white; color: var(--bratz-orange); padding: 1rem 2rem; border-radius: 50px; cursor: pointer; }
+
+        /* CELEBRATION OVERLAY */
+        #celebration-overlay {
+            position: fixed;
+            inset: 0;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(255, 69, 0, 0.1);
+            overflow: hidden;
         }
 
         .peach-particle {
             position: absolute;
-            bottom: -100px;
-            animation: float-emoji linear forwards;
+            top: -50px;
             pointer-events: none;
-            z-index: 100;
+            animation: fall linear forwards;
+            z-index: 50;
         }
 
-        .kawaii-glass {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 6px solid white;
-            box-shadow: 10px 10px 0px var(--peach-main), 15px 15px 30px rgba(0,0,0,0.1);
-            border-radius: 50px;
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Success Card */
+        .success-card {
+            background: rgba(255,255,255,0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 4px solid var(--peach-main);
+            box-shadow: 20px 20px 0px var(--bratz-orange);
+            text-align: center;
+            max-width: 550px;
+            width: 90%;
+            animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
 
-        .bratz-button {
-            box-shadow: 5px 5px 0px #000;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.1s;
+        @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .success-h1 { color: var(--bratz-orange); font-size: 3rem; text-shadow: 3px 3px 0px var(--bratz-yellow); margin-bottom: 1.5rem; }
+        
+        .zok-tag {
+            background: black;
+            color: var(--peach-main);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            border: 4px solid var(--bratz-yellow);
+            display: inline-block;
+            transform: rotate(-2deg);
+            margin-bottom: 2rem;
         }
 
-        .bratz-button:active {
-            box-shadow: 0px 0px 0px #000;
-            transform: translate(2px, 2px) !important;
-        }
-
-        .peach-text {
-            background: linear-gradient(90deg, #ff4500, #ffcc33, #ff4500);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-        }
-
-        @keyframes shine { to { background-position: 200% center; } }
-
-        @keyframes btn-glow {
-            0% { box-shadow: 5px 5px 0px #000, 0 0 10px rgba(255, 204, 51, 0.5); }
-            50% { box-shadow: 5px 5px 0px #000, 0 0 30px rgba(255, 204, 51, 0.8); }
-            100% { box-shadow: 5px 5px 0px #000, 0 0 10px rgba(255, 204, 51, 0.5); }
-        }
-
-        .glow-hover:hover {
-            animation: btn-glow 1.5s infinite;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(-2px, -2px) rotate(-1deg); }
-            50% { transform: translate(2px, 2px) rotate(1deg); }
-            75% { transform: translate(-2px, 2px) rotate(-1deg); }
-        }
-
-        .shake-pulse {
-            animation: shake 0.5s infinite ease-in-out;
-        }
+        .pulse-text { color: var(--bratz-orange); animation: pulse 1s infinite; font-size: 1.2rem; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
 </head>
-<body class="min-h-screen bg-[radial-gradient(circle_at_center,_#ffcc33_0%,_#ff8c00_100%)]">
-    <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+<body>
+
+    <div id="main-card" class="kawaii-glass">
+        <div class="emote top-left">🍑</div>
+        <div class="emote top-right">🍆</div>
+        <div class="emote bottom-left">🍆</div>
+        <div class="emote bottom-right">🍑</div>
+        <div style="font-size: 8rem; margin-bottom: 1rem;">🍑</div>
+        <h1>Sat, 3afak wrini tremtek</h1>
+        <div class="chunky-tag"> MA TZGELCH! 🍑🍆</div>
+        <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+            <button class="bratz-button" onclick="startCelebration()">Ok ghanwrik trmti 🍑🍑🍑 </button>
+            <button id="noBtn">La al9lawi 🍆🍆🍆</button>
+        </div>
+    </div>
+
+    <div id="celebration-overlay">
+        <div class="success-card">
+            <div style="position: absolute; top: -40px; right: -40px; font-size: 6rem;">🍑</div>
+            <div style="position: absolute; bottom: -40px; left: -40px; font-size: 6rem;">🍆</div>
+            <div style="font-size: 5rem; margin-bottom: 1rem;">🍑🍆🍑</div>
+            <h1 class="success-h1">A777 ghatwerini trima</h1>
+            <div class="zok-tag">WAAA 3LA ZOK 🍑</div>
+            <p class="pulse-text">NSHEDEK N3EDDEK MN TRMTK 🍑🍑🍑 🍆🍆🍆</p>
+        </div>
+    </div>
+
+    <script>
+        // Evasive Button
+        const noBtn = document.getElementById('noBtn');
+        function moveButton() {
+            const maxX = window.innerWidth - noBtn.offsetWidth - 50;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 50;
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.max(20, Math.floor(Math.random() * maxX)) + 'px';
+            noBtn.style.top = Math.max(20, Math.floor(Math.random() * maxY)) + 'px';
+        }
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton);
+
+        // Celebration Rain
+        function startCelebration() {
+            const overlay = document.getElementById('celebration-overlay');
+            overlay.style.display = 'flex';
+            
+            const chars = ['🍑', '🍑', '🍑', '🍆', '🍆'];
+            for (let i = 0; i < 120; i++) {
+                const p = document.createElement('div');
+                p.className = 'peach-particle';
+                p.innerText = chars[Math.floor(Math.random() * chars.length)];
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.fontSize = (Math.random() * 40 + 20) + 'px';
+                p.style.animationDelay = (Math.random() * 4) + 's';
+                p.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                overlay.appendChild(p);
+            }
+        }
+    </script>
 </body>
 </html>
